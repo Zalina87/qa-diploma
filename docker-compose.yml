@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+# -----------------  MySQL  -----------------
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin      
+      MYSQL_DATABASE: app         
+      MYSQL_USER: user      
+      MYSQL_PASSWORD: user    
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+# -----------------  PostgreSQL  -----------------
+  postgres:
+    image: postgres:13-alpine
+    container_name: postgres-db
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+# -----------------  Bank-gate simulator  -----------------
+  gate:
+    build:                                
+      context: ./gate-simulator
+    container_name: gate
+    ports:
+      - "9999:9999"
+    environment:
+      NODE_ENV: production
+   
+
+volumes:
+  mysql-data:
+  pg-data:
