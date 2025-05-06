@@ -26,40 +26,47 @@ public class DataHelper {
         private String cvc;
     }
 
-    public static String getYear(int shift) {
+    public static String getValidYearWithShift(int shift) {
         LocalDate year = LocalDate.now().plusYears(shift);
         return year.format(DateTimeFormatter.ofPattern("yy"));
     }
 
-    public static String getMonth(int shift) {
+    public static String getValidMonthWithShift(int shift) {
         LocalDate year = LocalDate.now().plusMonths(shift);
         return year.format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String getUserName() {
+    public static String generateValidFullUserName() {
         return faker.name().fullName();
     }
 
-    public static String getCvc() {
+    public static String getRandomCvc() {
         return faker.number().digits(3);
     }
+
+    public static String getApprovedCardNumber() {
+        return "4444 4444 4444 4441";
+    }
+
     public static CardInfo getApprovedCard() {
         return new CardInfo(
-                "4444 4444 4444 4441",
-                getMonth(3),
-                getYear(1),
-                getUserName(),
-                getCvc()
+                getApprovedCardNumber(),
+                getValidMonthWithShift(3),
+                getValidYearWithShift(1),
+                generateValidFullUserName(),
+                getRandomCvc()
         );
     }
 
     public static CardInfo getDeclinedCard() {
         return new CardInfo(
                 "4444 4444 4444 4442",
-                getMonth(3),
-                getYear(1),
-                getUserName(),
-                getCvc()
+                getValidMonthWithShift(3),
+                getValidYearWithShift(1),
+                generateValidFullUserName(),
+                getRandomCvc()
         );
     }
+
+
 }
