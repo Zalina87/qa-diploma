@@ -4,6 +4,6 @@
 
 2. Развернуть Docker compose при помощи команды docker-compose up
 
-3. Запустить сервис командой java -jar artifacts/aqa-shop.jar
+3. Запустить сервис командой java -jar aqa-shop.jar
 
 4. Запустить тесты
